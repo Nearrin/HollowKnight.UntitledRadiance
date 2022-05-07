@@ -7,11 +7,14 @@ public class Settings
 public class UntitledRadiance : Mod, IGlobalSettings<Settings>, IMenuMod
 {
     public static UntitledRadiance untitledRadiance;
+    private Control control;
     public List<Module> modules = new();
     private Settings settings_ = new();
     public bool ToggleButtonInsideMenu => true;
     public UntitledRadiance() : base("UntitledRadiance")
     {
+        untitledRadiance = this;
+        control = new(this);
     }
     public override string GetVersion() => "1.0.0.0";
     public override List<(string, string)> GetPreloadNames()

@@ -32,9 +32,9 @@ public abstract class Module
             }, i);
         }
     }
-    protected bool IsGreyPrince(GameObject gameObject)
+    protected bool IsAbsoluteRadiance(GameObject gameObject)
     {
-        return gameObject.scene.name == "GG_Grey_Prince_Zote" && gameObject.name == "Grey Prince";
+        return gameObject.scene.name == "GG_Radiance" && gameObject.name == "Absolute Radiance";
     }
     public virtual List<(string, string)> GetPreloadNames()
     {
