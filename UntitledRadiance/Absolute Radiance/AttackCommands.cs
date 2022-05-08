@@ -1,7 +1,7 @@
 ﻿namespace UntitledRadiance;
-public partial class Control : Module
+public partial class AttackCommands : Module
 {
-    public Control(UntitledRadiance untitledRadiance) : base(untitledRadiance)
+    public AttackCommands(UntitledRadiance untitledRadiance) : base(untitledRadiance)
     {
     }
     public override List<(string, string)> GetPreloadNames()

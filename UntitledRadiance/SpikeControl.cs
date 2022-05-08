@@ -25,7 +25,6 @@ public partial class SpikeControl : Module
             fsm.AddGlobalTransition("SPIKE WAVES FULL", "Spike Waves Full");
             fsm.AddCustomAction("Spike Waves Full", () =>
             {
-                Log("Starting skill: Spike Waves Full");
                 var beamSweeper = (fsm.GetState("Wave L").Actions[0] as SetFsmBool).gameObject.GameObject.Value;
                 beamSweeper.LocateMyFSM("Control").AccessBoolVariable("Force Left").Value = false;
                 beamSweeper.LocateMyFSM("Control").AccessBoolVariable("Force Right").Value = false;
@@ -37,16 +36,7 @@ public partial class SpikeControl : Module
                         fsm_.SendEvent("UP");
                     }
                 }
-                Log("Started skill: Spike Waves Full");
             });
-        }
-        else if (gameObject.scene.name == "GG_Radiance" && gameObject.name.StartsWith("Radiant Spike") && fsm.FsmName == "Hero Saver")
-        {
-            fsm.InsertCustomAction("Send", () =>
-            {
-                HeroController.instance.damageMode = GlobalEnums.DamageMode.FULL_DAMAGE;
-                fsm.SendEvent("FINISHED");
-            }, 0);
         }
     }
 }
