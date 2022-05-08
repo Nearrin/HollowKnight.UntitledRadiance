@@ -19,7 +19,7 @@ public partial class RadiantNailComb : Module
     public override void UpdateFSM(PlayMakerFSM fsm)
     {
         var gameObject = fsm.gameObject;
-        if (gameObject.scene.name == "DontDestroyOnLoad" && gameObject.name.StartsWith("Radiant Nail Comb") && fsm.FsmName == "Control")
+        if ((gameObject.scene.name == "DontDestroyOnLoad" || gameObject.scene.name == "GG_Radiance") && gameObject.name.StartsWith("Radiant Nail Comb") && fsm.FsmName == "Control")
         {
             fsm.InsertCustomAction("Spawn R", () =>
             {

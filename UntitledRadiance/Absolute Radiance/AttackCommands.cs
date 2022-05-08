@@ -29,6 +29,63 @@ public partial class AttackCommands : Module
             (fsm.GetState("EB 3").Actions[8] as SendEventByName).delay = 0.3f;
             (fsm.GetState("EB 3").Actions[9] as SendEventByName).delay = 0.55f;
             (fsm.GetState("EB 3").Actions[10] as Wait).time.Value = 0.6f;
+
+            fsm.InsertCustomAction("Dir", () =>
+            {
+                fsm.AccessIntVariable("nailFanIndex").Value = 0;
+            }, 0);
+            var cWFireSendEventByName = fsm.GetState("CW Fire").Actions[0] as SendEventByName;
+            fsm.InsertCustomAction("CW Fire", () =>
+            {
+                if (fsm.AccessIntVariable("nailFanIndex").Value % 2 == 0)
+                {
+                    cWFireSendEventByName.sendEvent = "FAN ATTACK CW";
+                }
+                else
+                {
+                    cWFireSendEventByName.sendEvent = "FAN ATTACK CCW";
+                }
+            }, 0);
+            fsm.InsertCustomAction("CW Double", () =>
+            {
+                fsm.AccessIntVariable("nailFanIndex").Value += 1;
+                if (fsm.AccessIntVariable("nailFanIndex").Value != 4)
+                {
+                    fsm.SetState("CW Restart");
+                }
+                else
+                {
+                    fsm.SetState("End");
+                }
+            }, 0);
+            var cCWFireSendEventByName = fsm.GetState("CCW Fire").Actions[0] as SendEventByName;
+            fsm.InsertCustomAction("CCW Fire", () =>
+            {
+                if (fsm.AccessIntVariable("nailFanIndex").Value % 2 == 0)
+                {
+                    cCWFireSendEventByName.sendEvent = "FAN ATTACK CCW";
+                }
+                else
+                {
+                    cCWFireSendEventByName.sendEvent = "FAN ATTACK CW";
+                }
+            }, 0);
+            fsm.InsertCustomAction("CCW Double", () =>
+            {
+                fsm.AccessIntVariable("nailFanIndex").Value += 1;
+                if (fsm.AccessIntVariable("nailFanIndex").Value != 4)
+                {
+                    fsm.SetState("CCW Restart");
+                }
+                else
+                {
+                    fsm.SetState("End");
+                }
+            }, 0);
+
+            (fsm.GetState("Orb Antic").Actions[2] as RandomInt).min.Value = 6;
+            (fsm.GetState("Orb Antic").Actions[2] as RandomInt).max.Value = 10;
+            (fsm.GetState("Orb Summon").Actions[2] as Wait).time.Value = 0.375f;
         }
     }
 }

@@ -19,10 +19,10 @@ public partial class RadiantNail : Module
     public override void UpdateFSM(PlayMakerFSM fsm)
     {
         var gameObject = fsm.gameObject;
-        if (gameObject.scene.name == "DontDestroyOnLoad" && gameObject.name.StartsWith("Radiant Nail") && fsm.FsmName == "Control")
+        if (gameObject.scene.name == "DontDestroyOnLoad" && gameObject.name.StartsWith("Radiant Nail") && !gameObject.name.StartsWith("Radiant Nail Comb") && fsm.FsmName == "Control")
         {
-            (fsm.GetState("Fire CCW").Actions[2] as FloatAdd).add.Value = -60;
-            (fsm.GetState("Fire CW").Actions[2] as FloatAdd).add.Value = -60;
+            (fsm.GetState("Fire CCW").Actions[2] as FloatAdd).add.Value = 90;
+            (fsm.GetState("Fire CW").Actions[2] as FloatAdd).add.Value = -90;
         }
     }
 }
