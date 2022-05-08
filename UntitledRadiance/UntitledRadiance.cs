@@ -12,6 +12,7 @@ public class UntitledRadiance : Mod, IGlobalSettings<Settings>, IMenuMod
     private PhaseControl phaseControl;
     private SpikeControl spkieControl;
     private RadiantSpike radiantSpike;
+    private RadiantNail radiantNail;
     private RadiantNailComb radiantNailComb;
     public List<Module> modules = new();
     private Settings settings_ = new();
@@ -24,6 +25,7 @@ public class UntitledRadiance : Mod, IGlobalSettings<Settings>, IMenuMod
         phaseControl = new(this);
         spkieControl = new(this);
         radiantSpike = new(this);
+        radiantNail = new(this);
         radiantNailComb = new(this);
     }
     public override string GetVersion() => "1.0.0.0";

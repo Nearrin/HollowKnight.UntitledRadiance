@@ -20,7 +20,6 @@ public partial class AttackCommands : Module
     {
         if (IsAbsoluteRadiance(fsm.gameObject) && fsm.FsmName == "Attack Commands")
         {
-            Log("start");
             (fsm.GetState("EB 1").Actions[8] as SendEventByName).delay = 0.3f;
             (fsm.GetState("EB 1").Actions[9] as SendEventByName).delay = 0.55f;
             (fsm.GetState("EB 1").Actions[10] as Wait).time.Value = 0.6f;
@@ -30,7 +29,6 @@ public partial class AttackCommands : Module
             (fsm.GetState("EB 3").Actions[8] as SendEventByName).delay = 0.3f;
             (fsm.GetState("EB 3").Actions[9] as SendEventByName).delay = 0.55f;
             (fsm.GetState("EB 3").Actions[10] as Wait).time.Value = 0.6f;
-            Log("end");
         }
     }
 }
