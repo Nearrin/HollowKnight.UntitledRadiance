@@ -8,10 +8,15 @@ public partial class AttackCommands : Module
     {
         return new List<(string, string)>
         {
+            ("GG_Radiance", "Boss Control"),
         };
     }
     public override void LoadPrefabs(Dictionary<string, Dictionary<string, GameObject>> preloadedObjects)
     {
+        var bossControl = preloadedObjects["GG_Radiance"]["Boss Control"];
+        var absoluteRadiance = bossControl.transform.Find("Absolute Radiance").gameObject;
+        var eyeBeamGlow = absoluteRadiance.transform.Find("Eye Beam Glow").gameObject;
+        prefabs["trackingEyeBeamGlow"] = eyeBeamGlow;
     }
     public override void UpdateHitInstance(HealthManager healthManager, HitInstance hitInstance)
     {
@@ -29,6 +34,47 @@ public partial class AttackCommands : Module
             (fsm.GetState("EB 3").Actions[8] as SendEventByName).delay = 0.3f;
             (fsm.GetState("EB 3").Actions[9] as SendEventByName).delay = 0.55f;
             (fsm.GetState("EB 3").Actions[10] as Wait).time.Value = 0.6f;
+
+            fsm.InsertCustomAction("EB 1", () =>
+            {
+                fsm.SendEvent("END");
+            }, 4);
+            fsm.AddState("Tracking Beam");
+            fsm.AddTransition("EB 1", "END", "Tracking Beam");
+            var trackingEyeBeamGlow = UnityEngine.Object.Instantiate((prefabs["trackingEyeBeamGlow"] as GameObject), fsm.gameObject.transform);
+            trackingEyeBeamGlow.SetActive(true);
+            var trackingBurst = trackingEyeBeamGlow.transform.Find("Burst 1").gameObject;
+            GameObject trackingBeam = null;
+            foreach (var fsm_ in trackingBurst.GetComponentsInChildren<PlayMakerFSM>())
+            {
+                if (fsm_.gameObject.name != "Radiant Beam")
+                {
+                    UnityEngine.Object.Destroy(fsm_.gameObject);
+                }
+                else
+                {
+                    trackingBeam = fsm_.gameObject;
+                }
+            }
+            UnityEngine.Object.Destroy(trackingEyeBeamGlow.transform.Find("Burst 2").gameObject);
+            UnityEngine.Object.Destroy(trackingEyeBeamGlow.transform.Find("Burst 3").gameObject);
+            UnityEngine.Object.Destroy(trackingEyeBeamGlow.transform.Find("Ascend Beam").gameObject);
+            UnityEngine.Object.Destroy(trackingEyeBeamGlow.transform.Find("Sprite").gameObject);
+            var fsmOwnerDefault = new FsmOwnerDefault
+            {
+                OwnerOption = OwnerDefaultOption.SpecifyGameObject,
+                GameObject = trackingBeam,
+            };
+            var fSMEventTarget = new FsmEventTarget
+            {
+                target = FsmEventTarget.EventTarget.GameObject,
+                gameObject = fsmOwnerDefault,
+            };
+            fsm.AddAction("Tracking Beam", fsm.CreateSendEventByName(fSMEventTarget, "ANTIC", 0));
+            fsm.AddAction("Tracking Beam", fsm.CreateSendEventByName(fSMEventTarget, "FIRE", 0.3f));
+            fsm.AddAction("Tracking Beam", fsm.CreateSendEventByName(fSMEventTarget, "END", 2));
+            fsm.AddAction("Tracking Beam", fsm.CreateWait(2.5f, fsm.GetFSMEvent("FINISHED")));
+            fsm.AddTransition("Tracking Beam", "FINISHED", "EB End");
 
             fsm.InsertCustomAction("Dir", () =>
             {

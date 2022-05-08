@@ -52,7 +52,6 @@ public class UntitledRadiance : Mod, IGlobalSettings<Settings>, IMenuMod
         On.EnemyDreamnailReaction.RecieveDreamImpact += RecieveDreamImpact;
         On.HealthManager.TakeDamage += HealthManagerTakeDamage;
         On.PlayMakerFSM.OnEnable += PlayMakerFSMOnEnable;
-        UnityEngine.SceneManagement.SceneManager.activeSceneChanged += ActiveSceneChanged;
         if (preloadedObjects != null)
         {
             foreach (var module in modules)
@@ -143,21 +142,6 @@ public class UntitledRadiance : Mod, IGlobalSettings<Settings>, IMenuMod
                 module.UpdateFSM(fsm);
             }
             onEnable(fsm);
-        }
-        catch (Exception exception)
-        {
-            LogError(exception.Message);
-        }
-    }
-
-    private void ActiveSceneChanged(UnityEngine.SceneManagement.Scene from, UnityEngine.SceneManagement.Scene to)
-    {
-        try
-        {
-            foreach (var module in GetActiveModules())
-            {
-                module.Initialize(to);
-            }
         }
         catch (Exception exception)
         {

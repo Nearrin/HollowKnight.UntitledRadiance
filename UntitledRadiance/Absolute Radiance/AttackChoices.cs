@@ -34,6 +34,8 @@ public partial class AttackChoices : Module
             (fsm.GetState("Nail Top Sweep").Actions[2] as SendEventByName).delay = 1f;
             (fsm.GetState("Nail Top Sweep").Actions[3] as SendEventByName).delay = 1.5f;
             (fsm.GetState("Nail Top Sweep").Actions[4] as Wait).time.Value = 3.25f;
+
+            (fsm.GetState("A1 Choice").Actions[1] as SendRandomEventV3).weights[3] = 100;
         }
     }
 }

@@ -20,18 +20,12 @@ public partial class BeamSweeper : Module
     public override void UpdateHitInstance(HealthManager healthManager, HitInstance hitInstance)
     {
     }
-    public override void Initialize(UnityEngine.SceneManagement.Scene scene)
-    {
-        if (scene.name == "GG_Radiance")
-        {
-            UnityEngine.Object.Instantiate((prefabs["beamSweeper"] as GameObject), GameObject.Find("Boss Control").transform);
-        }
-    }
     public override void UpdateFSM(PlayMakerFSM fsm)
     {
         var gameObject = fsm.gameObject;
         if (gameObject.scene.name == "GG_Radiance" && gameObject.name == "Beam Sweeper" && fsm.FsmName == "Control")
         {
+            UnityEngine.Object.Instantiate((prefabs["beamSweeper"] as GameObject), GameObject.Find("Boss Control").transform);
             foreach (var direction in new List<string> { "L", "R", "L2", "R2" })
             {
                 var name = direction;

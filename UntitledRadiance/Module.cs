@@ -61,7 +61,4 @@ public abstract class Module
     public virtual void UpdateFSM(PlayMakerFSM fsm)
     {
     }
-    public virtual void Initialize(UnityEngine.SceneManagement.Scene scene)
-    {
-    }
 }
