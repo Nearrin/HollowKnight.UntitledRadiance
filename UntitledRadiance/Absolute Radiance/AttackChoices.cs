@@ -30,10 +30,10 @@ public partial class AttackChoices : Module
             fsm.InsertAction("Nail R Sweep", fsm.CreateSendEventByName(eventTarget, "COMB L", 2.9f), 2);
             fsm.InsertAction("Nail R Sweep", fsm.CreateSendEventByName(eventTarget, "COMB L", 1.7f), 1);
 
-            (fsm.GetState("Nail Top Sweep").Actions[1] as SendEventByName).delay = 0.4f;
-            (fsm.GetState("Nail Top Sweep").Actions[2] as SendEventByName).delay = 0.8f;
-            (fsm.GetState("Nail Top Sweep").Actions[3] as SendEventByName).delay = 1.2f;
-            (fsm.GetState("Nail Top Sweep").Actions[4] as Wait).time.Value = 2.95f;
+            (fsm.GetState("Nail Top Sweep").Actions[1] as SendEventByName).delay = 0.5f;
+            (fsm.GetState("Nail Top Sweep").Actions[2] as SendEventByName).delay = 1f;
+            (fsm.GetState("Nail Top Sweep").Actions[3] as SendEventByName).delay = 1.5f;
+            (fsm.GetState("Nail Top Sweep").Actions[4] as Wait).time.Value = 3.25f;
         }
     }
 }
