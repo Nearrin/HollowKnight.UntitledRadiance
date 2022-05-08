@@ -14,6 +14,7 @@ public class UntitledRadiance : Mod, IGlobalSettings<Settings>, IMenuMod
     private RadiantSpike radiantSpike;
     private RadiantNail radiantNail;
     private RadiantNailComb radiantNailComb;
+    private BeamSweeper beamSweeper;
     public List<Module> modules = new();
     private Settings settings_ = new();
     public bool ToggleButtonInsideMenu => true;
@@ -27,6 +28,7 @@ public class UntitledRadiance : Mod, IGlobalSettings<Settings>, IMenuMod
         radiantSpike = new(this);
         radiantNail = new(this);
         radiantNailComb = new(this);
+        beamSweeper = new(this);
     }
     public override string GetVersion() => "1.0.0.0";
     public override List<(string, string)> GetPreloadNames()
