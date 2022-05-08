@@ -8,6 +8,8 @@ public class UntitledRadiance : Mod, IGlobalSettings<Settings>, IMenuMod
 {
     public static UntitledRadiance untitledRadiance;
     private Control control;
+    private PhaseControl phaseControl;
+    private SpikeControl spkieControl;
     public List<Module> modules = new();
     private Settings settings_ = new();
     public bool ToggleButtonInsideMenu => true;
@@ -15,6 +17,8 @@ public class UntitledRadiance : Mod, IGlobalSettings<Settings>, IMenuMod
     {
         untitledRadiance = this;
         control = new(this);
+        phaseControl = new(this);
+        spkieControl = new(this);
     }
     public override string GetVersion() => "1.0.0.0";
     public override List<(string, string)> GetPreloadNames()
@@ -159,7 +163,6 @@ public class UntitledRadiance : Mod, IGlobalSettings<Settings>, IMenuMod
                 Values = new string[]
                 {
                     Language.Language.Get("MOH_ON", "MainMenu"),
-                    "SKIN-ONLY",
                     Language.Language.Get("MOH_OFF", "MainMenu"),
                 },
                 Saver = i => settings_.status = i,

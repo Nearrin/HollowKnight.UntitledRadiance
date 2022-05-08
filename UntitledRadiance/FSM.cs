@@ -93,6 +93,15 @@ public static class FSM
         fsm.FsmVariables.BoolVariables = fsm.FsmVariables.BoolVariables.Append(fsmBool).ToArray();
         return fsmBool;
     }
+    public static FsmString AccessStringVariable(this PlayMakerFSM fsm, string name)
+    {
+        FsmString fsmString = fsm.FsmVariables.StringVariables.FirstOrDefault(x => x.Name == name);
+        if (fsmString != null)
+            return fsmString;
+        fsmString = new FsmString(name);
+        fsm.FsmVariables.StringVariables = fsm.FsmVariables.StringVariables.Append(fsmString).ToArray();
+        return fsmString;
+    }
     public static Tk2dPlayAnimation CreateTk2dPlayAnimation(this PlayMakerFSM fsm, GameObject gameObject, string clip)
     {
         var fsmOwnerDefault = new FsmOwnerDefault
