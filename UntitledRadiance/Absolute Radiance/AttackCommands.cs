@@ -109,9 +109,11 @@ public partial class AttackCommands : Module
             };
             fsm.AddAction("Rotating Beam", fsm.CreateSendEventByName(fSMEventTarget, "ANTIC", 0));
             fsm.AddAction("Rotating Beam", fsm.CreateSendEventByName(fSMEventTarget, "FIRE", 0.2f));
-            fsm.AddAction("Rotating Beam", fsm.CreateSendEventByName(fSMEventTarget, "END", 5.2f));
-            fsm.AddAction("Rotating Beam", fsm.CreateWait(5.4f, fsm.GetFSMEvent("FINISHED")));
-            fsm.AddTransition("Rotating Beam", "FINISHED", "EB Glow End");
+            fsm.AddState("Rotating Beam End");
+            fsm.AddTransition("Rotating Beam", "CW", "Rotating Beam End");
+            fsm.AddAction("Rotating Beam End", fsm.CreateSendEventByName(fSMEventTarget, "END", 0));
+            fsm.AddAction("Rotating Beam End", fsm.CreateWait(0, fsm.GetFSMEvent("FINISHED")));
+            fsm.AddTransition("Rotating Beam End", "FINISHED", "EB Glow End");
 
             fsm.InsertCustomAction("Dir", () =>
             {
@@ -169,8 +171,6 @@ public partial class AttackCommands : Module
             (fsm.GetState("Orb Antic").Actions[2] as RandomInt).min.Value = 6;
             (fsm.GetState("Orb Antic").Actions[2] as RandomInt).max.Value = 10;
             (fsm.GetState("Orb Summon").Actions[2] as Wait).time.Value = 0.375f;
-
-            LogFSM(fsm);
         }
     }
 }

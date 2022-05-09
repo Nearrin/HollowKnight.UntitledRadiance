@@ -28,6 +28,14 @@ public partial class Control : Module
                     fsm.SendEvent("SHIFT");
                 }
             }, 0);
+            fsm.InsertCustomAction("A1 Tele 2", () =>
+            {
+                var teleport = fsm.gameObject.LocateMyFSM("Teleport");
+                if (teleport.ActiveStateName != "Idle")
+                {
+                    teleport.SetState("Antic");
+                }
+            }, 1);
         }
     }
 }

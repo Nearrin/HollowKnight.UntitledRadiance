@@ -65,6 +65,20 @@ public partial class PhaseControl : Module
                 }
                 else if (phase == "1.4")
                 {
+                    if (hp <= 5000 - 32 * 4)
+                    {
+                        if(fsm.gameObject.LocateMyFSM("Attack Commands").ActiveStateName== "Rotating Beam")
+                        {
+                            fsm.AccessStringVariable("phase").Value = "2.1";
+                            phase = fsm.AccessStringVariable("phase").Value;
+                            Log("Switching phase to: " + phase.ToString());
+                            fsm.gameObject.LocateMyFSM("Attack Commands").SendEvent("CW");
+                            Log("Switched phase to: " + phase.ToString());
+                        }
+                    }
+                }
+                else if (phase == "2.1")
+                {
                 }
                 else
                 {
