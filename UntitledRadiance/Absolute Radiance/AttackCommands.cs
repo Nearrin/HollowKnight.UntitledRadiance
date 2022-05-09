@@ -37,7 +37,10 @@ public partial class AttackCommands : Module
 
             fsm.InsertCustomAction("EB 1", () =>
             {
-                fsm.SendEvent("END");
+                if (UnityEngine.Random.Range(0, 2.5f) < 1.5f)
+                {
+                    fsm.SendEvent("END");
+                }
             }, 4);
             fsm.AddState("Tracking Beam");
             fsm.AddTransition("EB 1", "END", "Tracking Beam");
@@ -60,6 +63,8 @@ public partial class AttackCommands : Module
             UnityEngine.Object.Destroy(trackingEyeBeamGlow.transform.Find("Burst 3").gameObject);
             UnityEngine.Object.Destroy(trackingEyeBeamGlow.transform.Find("Ascend Beam").gameObject);
             UnityEngine.Object.Destroy(trackingEyeBeamGlow.transform.Find("Sprite").gameObject);
+            trackingBurst.transform.Rotate(0, 0, -90);
+            trackingBurst.AddComponent<TrackingBurstRotator>();
             var fsmOwnerDefault = new FsmOwnerDefault
             {
                 OwnerOption = OwnerDefaultOption.SpecifyGameObject,
@@ -71,10 +76,10 @@ public partial class AttackCommands : Module
                 gameObject = fsmOwnerDefault,
             };
             fsm.AddAction("Tracking Beam", fsm.CreateSendEventByName(fSMEventTarget, "ANTIC", 0));
-            fsm.AddAction("Tracking Beam", fsm.CreateSendEventByName(fSMEventTarget, "FIRE", 0.3f));
-            fsm.AddAction("Tracking Beam", fsm.CreateSendEventByName(fSMEventTarget, "END", 2));
+            fsm.AddAction("Tracking Beam", fsm.CreateSendEventByName(fSMEventTarget, "FIRE", 0.2f));
+            fsm.AddAction("Tracking Beam", fsm.CreateSendEventByName(fSMEventTarget, "END", 1.4f));
             fsm.AddAction("Tracking Beam", fsm.CreateWait(2.5f, fsm.GetFSMEvent("FINISHED")));
-            fsm.AddTransition("Tracking Beam", "FINISHED", "EB End");
+            fsm.AddTransition("Tracking Beam", "FINISHED", "EB Glow End");
 
             fsm.InsertCustomAction("Dir", () =>
             {

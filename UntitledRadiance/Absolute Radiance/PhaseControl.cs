@@ -55,7 +55,13 @@ public partial class PhaseControl : Module
                 }
                 else if (phase == "1.3")
                 {
-
+                    if (hp <= 5000 - 32 * 3)
+                    {
+                        fsm.AccessStringVariable("phase").Value = "1.4";
+                        phase = fsm.AccessStringVariable("phase").Value;
+                        Log("Switching phase to: " + phase.ToString());
+                        Log("Switched phase to: " + phase.ToString());
+                    }
                 }
                 else
                 {

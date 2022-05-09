@@ -35,7 +35,17 @@ public partial class AttackChoices : Module
             (fsm.GetState("Nail Top Sweep").Actions[3] as SendEventByName).delay = 1.5f;
             (fsm.GetState("Nail Top Sweep").Actions[4] as Wait).time.Value = 3.25f;
 
-            (fsm.GetState("A1 Choice").Actions[1] as SendRandomEventV3).weights[3] = 100;
+            (fsm.GetState("A1 Choice").Actions[1] as SendRandomEventV3).weights[3] = 2.5f;
+
+            fsm.AddTransition("Nail Top Sweep", "END", "A1 Choice");
+            fsm.InsertCustomAction("Nail Top Sweep", () =>
+            {
+                var phase = fsm.gameObject.LocateMyFSM("Phase Control").AccessStringVariable("phase").Value;
+                if (phase == "1.3")
+                {
+                    fsm.SendEvent("END");
+                }
+            }, 0);
         }
     }
 }
