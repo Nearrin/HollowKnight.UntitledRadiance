@@ -37,7 +37,12 @@ public partial class AttackCommands : Module
 
             fsm.InsertCustomAction("EB 1", () =>
             {
-                if (UnityEngine.Random.Range(0, 2.5f) < 1.5f)
+                var phase = fsm.gameObject.LocateMyFSM("Phase Control").AccessStringVariable("phase").Value;
+                if (phase == "1.4")
+                {
+                    fsm.SendEvent("CW");
+                }
+                else if (UnityEngine.Random.Range(0, 2.5f) < 1.5f)
                 {
                     fsm.SendEvent("END");
                 }
@@ -77,9 +82,36 @@ public partial class AttackCommands : Module
             };
             fsm.AddAction("Tracking Beam", fsm.CreateSendEventByName(fSMEventTarget, "ANTIC", 0));
             fsm.AddAction("Tracking Beam", fsm.CreateSendEventByName(fSMEventTarget, "FIRE", 0.2f));
-            fsm.AddAction("Tracking Beam", fsm.CreateSendEventByName(fSMEventTarget, "END", 1.4f));
-            fsm.AddAction("Tracking Beam", fsm.CreateWait(2.5f, fsm.GetFSMEvent("FINISHED")));
+            fsm.AddAction("Tracking Beam", fsm.CreateSendEventByName(fSMEventTarget, "END", 1.2f));
+            fsm.AddAction("Tracking Beam", fsm.CreateWait(1.4f, fsm.GetFSMEvent("FINISHED")));
             fsm.AddTransition("Tracking Beam", "FINISHED", "EB Glow End");
+
+            fsm.AddState("Rotating Beam");
+            fsm.AddTransition("EB 1", "CW", "Rotating Beam");
+            var rotatingEyeBeamGlow = UnityEngine.Object.Instantiate((prefabs["trackingEyeBeamGlow"] as GameObject), fsm.gameObject.transform);
+            rotatingEyeBeamGlow.SetActive(true);
+            var rotatingBurst = rotatingEyeBeamGlow.transform.Find("Burst 1").gameObject;
+            UnityEngine.Object.Destroy(rotatingEyeBeamGlow.transform.Find("Burst 2").gameObject);
+            UnityEngine.Object.Destroy(rotatingEyeBeamGlow.transform.Find("Burst 3").gameObject);
+            UnityEngine.Object.Destroy(rotatingEyeBeamGlow.transform.Find("Ascend Beam").gameObject);
+            UnityEngine.Object.Destroy(rotatingEyeBeamGlow.transform.Find("Sprite").gameObject);
+            rotatingBurst.AddComponent<RotatingBurstRotator>();
+            fsmOwnerDefault = new FsmOwnerDefault
+            {
+                OwnerOption = OwnerDefaultOption.SpecifyGameObject,
+                GameObject = rotatingBurst,
+            };
+            fSMEventTarget = new FsmEventTarget
+            {
+                target = FsmEventTarget.EventTarget.GameObject,
+                gameObject = fsmOwnerDefault,
+                sendToChildren= true,
+            };
+            fsm.AddAction("Rotating Beam", fsm.CreateSendEventByName(fSMEventTarget, "ANTIC", 0));
+            fsm.AddAction("Rotating Beam", fsm.CreateSendEventByName(fSMEventTarget, "FIRE", 0.2f));
+            fsm.AddAction("Rotating Beam", fsm.CreateSendEventByName(fSMEventTarget, "END", 5.2f));
+            fsm.AddAction("Rotating Beam", fsm.CreateWait(5.4f, fsm.GetFSMEvent("FINISHED")));
+            fsm.AddTransition("Rotating Beam", "FINISHED", "EB Glow End");
 
             fsm.InsertCustomAction("Dir", () =>
             {
@@ -137,6 +169,8 @@ public partial class AttackCommands : Module
             (fsm.GetState("Orb Antic").Actions[2] as RandomInt).min.Value = 6;
             (fsm.GetState("Orb Antic").Actions[2] as RandomInt).max.Value = 10;
             (fsm.GetState("Orb Summon").Actions[2] as Wait).time.Value = 0.375f;
+
+            LogFSM(fsm);
         }
     }
 }
