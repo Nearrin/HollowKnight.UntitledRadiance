@@ -7,6 +7,8 @@ public class Settings
 public class UntitledRadiance : Mod, IGlobalSettings<Settings>, IMenuMod
 {
     public static UntitledRadiance untitledRadiance;
+    private Control control;
+    private Teleport teleport;
     private AttackChoices attackChoices;
     private AttackCommands attackCommands;
     private PhaseControl phaseControl;
@@ -22,6 +24,8 @@ public class UntitledRadiance : Mod, IGlobalSettings<Settings>, IMenuMod
     public UntitledRadiance() : base("UntitledRadiance")
     {
         untitledRadiance = this;
+        control = new(this);
+        teleport = new(this);
         attackChoices = new(this);
         attackCommands = new(this);
         phaseControl = new(this);

@@ -63,6 +63,9 @@ public partial class PhaseControl : Module
                         Log("Switched phase to: " + phase.ToString());
                     }
                 }
+                else if (phase == "1.4")
+                {
+                }
                 else
                 {
                     Log("Unknown phase: " + phase.ToString());

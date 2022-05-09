@@ -66,6 +66,15 @@ public static class FSM
         }
         throw new Exception();
     }
+    public static FsmVector3 AccessVector3Variable(this PlayMakerFSM fsm, string name)
+    {
+        FsmVector3 fsmVector3 = fsm.FsmVariables.Vector3Variables.FirstOrDefault(x => x.Name == name);
+        if (fsmVector3 != null)
+            return fsmVector3;
+        fsmVector3 = new FsmVector3(name);
+        fsm.FsmVariables.Vector3Variables = fsm.FsmVariables.Vector3Variables.Append(fsmVector3).ToArray();
+        return fsmVector3;
+    }
     public static FsmGameObject AccessGameObjectVariable(this PlayMakerFSM fsm, string name)
     {
         FsmGameObject fsmGameObject = fsm.FsmVariables.GameObjectVariables.FirstOrDefault(x => x.Name == name);
