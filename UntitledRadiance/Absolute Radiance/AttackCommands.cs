@@ -98,8 +98,8 @@ public partial class AttackCommands : Module
             };
             fsm.AddAction("Tracking Beam", fsm.CreateSendEventByName(fSMEventTarget, "ANTIC", 0));
             fsm.AddAction("Tracking Beam", fsm.CreateSendEventByName(fSMEventTarget, "FIRE", 1));
-            fsm.AddAction("Tracking Beam", fsm.CreateSendEventByName(fSMEventTarget, "END", 2));
-            fsm.AddAction("Tracking Beam", fsm.CreateWait(2.2f, fsm.GetFSMEvent("FINISHED")));
+            fsm.AddAction("Tracking Beam", fsm.CreateSendEventByName(fSMEventTarget, "END", 1.5f));
+            fsm.AddAction("Tracking Beam", fsm.CreateWait(1.7f, fsm.GetFSMEvent("FINISHED")));
             fsm.AddTransition("Tracking Beam", "FINISHED", "EB Glow End");
 
             fsm.AddState("Rotating Beam");

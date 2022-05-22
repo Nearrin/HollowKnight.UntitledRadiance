@@ -33,7 +33,7 @@ public partial class PhaseControl : Module
                 var spikeControl = fsm.gameObject.transform.parent.Find("Spike Control").gameObject;
                 if (phase == "1.1")
                 {
-                    if (hp <= 5000 - 800)
+                    if (hp <= 5000 - 1000)
                     {
                         fsm.AccessStringVariable("phase").Value = "1.2";
                         phase = fsm.AccessStringVariable("phase").Value;
@@ -44,7 +44,7 @@ public partial class PhaseControl : Module
                 }
                 else if (phase == "1.2")
                 {
-                    if (hp <= 5000 - 800 * 2)
+                    if (hp <= 5000 - 1000 * 2)
                     {
                         fsm.AccessStringVariable("phase").Value = "1.3";
                         phase = fsm.AccessStringVariable("phase").Value;
@@ -55,7 +55,7 @@ public partial class PhaseControl : Module
                 }
                 else if (phase == "1.3")
                 {
-                    if (hp <= 5000 - 800 * 3)
+                    if (hp <= 5000 - 1000 * 3)
                     {
                         fsm.AccessStringVariable("phase").Value = "1.4";
                         phase = fsm.AccessStringVariable("phase").Value;
@@ -65,7 +65,7 @@ public partial class PhaseControl : Module
                 }
                 else if (phase == "1.4")
                 {
-                    if (hp <= 5000 - 800 * 4 && false)
+                    if (hp <= 5000 - 1000 * 4 && false)
                     {
                         if(fsm.gameObject.LocateMyFSM("Attack Commands").ActiveStateName== "Rotating Beam")
                         {

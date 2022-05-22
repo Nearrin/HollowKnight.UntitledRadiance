@@ -1,7 +1,7 @@
 ﻿namespace UntitledRadiance;
 public class TrackingBurstRotator : MonoBehaviour
 {
-    private float duration = 1f;
+    private float duration = 0.5f;
     private Vector3 initalAngles;
     private GameObject radiantBeam;
     private bool fire = false;

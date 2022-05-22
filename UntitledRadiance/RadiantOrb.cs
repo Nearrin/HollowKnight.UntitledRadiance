@@ -32,6 +32,9 @@ public partial class RadiantOrb : Module
             {
                 var hKPrimeBlast = UnityEngine.Object.Instantiate(prefabs["hKPrimeBlast"] as GameObject);
                 hKPrimeBlast.transform.position = gameObject.transform.position;
+                var localScale = hKPrimeBlast.transform.localScale;
+                localScale *= 2;
+                hKPrimeBlast.transform.localScale = localScale;
                 hKPrimeBlast.LocateMyFSM("Control").SetState("Blast");
                 fsm.AccessGameObjectVariable("hKPrimeBlast").Value = hKPrimeBlast;
             };
