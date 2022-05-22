@@ -28,9 +28,6 @@ public partial class RadiantOrb : Module
         {
             fsm.AddState("Blast Begin");
             fsm.AddState("Blast End");
-            fsm.ChangeTransition("Impact", "FINISHED", "Blast Begin");
-            fsm.ChangeTransition("Stop Particles", "FINISHED", "Blast Begin");
-            fsm.AddAction("Blast Begin", fsm.CreateWait(8, fsm.GetFSMEvent("FINISHED")));
             var blast = () =>
             {
                 var hKPrimeBlast = UnityEngine.Object.Instantiate(prefabs["hKPrimeBlast"] as GameObject);
@@ -38,7 +35,11 @@ public partial class RadiantOrb : Module
                 hKPrimeBlast.LocateMyFSM("Control").SetState("Blast");
                 fsm.AccessGameObjectVariable("hKPrimeBlast").Value = hKPrimeBlast;
             };
-            fsm.AddCustomAction("Blast Begin", blast);
+            fsm.InsertCustomAction("Impact", blast, 0);
+            fsm.ChangeTransition("Impact", "FINISHED", "Blast Begin");
+            fsm.InsertCustomAction("Stop Particles", blast, 0);
+            fsm.ChangeTransition("Stop Particles", "FINISHED", "Blast Begin");
+            fsm.AddAction("Blast Begin", fsm.CreateWait(8, fsm.GetFSMEvent("FINISHED")));
             fsm.AddTransition("Blast Begin", "FINISHED", "Blast End");
             fsm.AddCustomAction("Blast End", () =>
             {

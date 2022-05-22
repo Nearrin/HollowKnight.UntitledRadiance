@@ -30,10 +30,10 @@ public partial class AttackChoices : Module
             fsm.InsertAction("Nail R Sweep", fsm.CreateSendEventByName(eventTarget, "COMB L", 2.9f), 2);
             fsm.InsertAction("Nail R Sweep", fsm.CreateSendEventByName(eventTarget, "COMB L", 1.7f), 1);
 
-            (fsm.GetState("Nail Top Sweep").Actions[1] as SendEventByName).delay = 0.5f;
-            (fsm.GetState("Nail Top Sweep").Actions[2] as SendEventByName).delay = 1f;
-            (fsm.GetState("Nail Top Sweep").Actions[3] as SendEventByName).delay = 1.5f;
-            (fsm.GetState("Nail Top Sweep").Actions[4] as Wait).time.Value = 3.25f;
+            (fsm.GetState("Nail Top Sweep").Actions[1] as SendEventByName).delay = 0.6f;
+            (fsm.GetState("Nail Top Sweep").Actions[2] as SendEventByName).delay = 1.2f;
+            (fsm.GetState("Nail Top Sweep").Actions[3] as SendEventByName).delay = 1.8f;
+            (fsm.GetState("Nail Top Sweep").Actions[4] as Wait).time.Value = 3.55f;
 
             (fsm.GetState("A1 Choice").Actions[1] as SendRandomEventV3).weights[3] = 2.5f;
             fsm.InsertCustomAction("A1 Choice", () =>

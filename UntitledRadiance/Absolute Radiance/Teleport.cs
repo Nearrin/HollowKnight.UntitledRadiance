@@ -25,7 +25,7 @@ public partial class Teleport : Module
                 var phase = fsm.gameObject.LocateMyFSM("Phase Control").AccessStringVariable("phase").Value;
                 if (phase == "1.4")
                 {
-                    fsm.AccessVector3Variable("Destination").Value = new Vector3(60.63f, 29, 0.006f);
+                    fsm.AccessVector3Variable("Destination").Value = new Vector3(60.63f, 31, 0.006f);
                 }
             }, 0);
         }

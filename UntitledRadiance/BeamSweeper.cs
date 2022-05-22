@@ -48,7 +48,7 @@ public partial class BeamSweeper : Module
                 }
                 fsm.AddState("Beam Sweep " + direction + " Delay");
                 fsm.ChangeTransition("Idle", "BEAM SWEEP " + direction, "Beam Sweep " + direction + " Delay");
-                fsm.AddAction("Beam Sweep " + direction + " Delay", fsm.CreateWait(1, fsm.GetFSMEvent("FINISHED")));
+                fsm.AddAction("Beam Sweep " + direction + " Delay", fsm.CreateWait(1.5f, fsm.GetFSMEvent("FINISHED")));
                 fsm.AddTransition("Beam Sweep " + direction + " Delay", "FINISHED", "Beam Sweep " + antiName);
                 if (direction == "L")
                 {

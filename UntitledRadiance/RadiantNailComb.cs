@@ -21,6 +21,8 @@ public partial class RadiantNailComb : Module
         var gameObject = fsm.gameObject;
         if ((gameObject.scene.name == "DontDestroyOnLoad" || gameObject.scene.name == "GG_Radiance") && gameObject.name.StartsWith("Radiant Nail Comb") && fsm.FsmName == "Control")
         {
+            (fsm.GetAction("Top", 0) as RandomFloat).min = 58.7f;
+            (fsm.GetAction("Top", 0) as RandomFloat).max = 62.7f;
             fsm.InsertCustomAction("Spawn R", () =>
             {
                 if (fsm.AccessIntVariable("Type").Value == 3)
