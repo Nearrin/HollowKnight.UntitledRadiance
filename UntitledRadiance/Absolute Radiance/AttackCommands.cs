@@ -170,6 +170,14 @@ public partial class AttackCommands : Module
 
             (fsm.GetState("Orb Antic").Actions[2] as RandomInt).min.Value = 6;
             (fsm.GetState("Orb Antic").Actions[2] as RandomInt).max.Value = 10;
+            fsm.AddCustomAction("Orb Pos", () =>
+            {
+                var phase = fsm.gameObject.LocateMyFSM("Phase Control").AccessStringVariable("phase").Value;
+                if (phase == "1.3")
+                {
+                    (fsm.GetState("Orb Summon").Actions[2] as Wait).time.Value = 1.5f;
+                }
+            });
             (fsm.GetState("Orb Summon").Actions[2] as Wait).time.Value = 0.375f;
         }
     }
