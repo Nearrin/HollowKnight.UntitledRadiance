@@ -25,6 +25,22 @@ public partial class AttackCommands : Module
     {
         if (IsAbsoluteRadiance(fsm.gameObject) && fsm.FsmName == "Attack Commands")
         {
+            fsm.AddCustomAction("NF Glow", () =>
+            {
+                var phase = fsm.gameObject.LocateMyFSM("Phase Control").AccessStringVariable("phase").Value;
+                if (phase == "1.3")
+                {
+                    (fsm.GetState("EB 1").Actions[9] as SendEventByName).delay = 0.6f;
+                    (fsm.GetState("EB 1").Actions[10] as SendEventByName).delay = 0.85f;
+                    (fsm.GetState("EB 1").Actions[11] as Wait).time.Value = 0.95f;
+                    (fsm.GetState("EB 2").Actions[8] as SendEventByName).delay = 0.6f;
+                    (fsm.GetState("EB 2").Actions[9] as SendEventByName).delay = 0.85f;
+                    (fsm.GetState("EB 2").Actions[10] as Wait).time.Value = 0.95f;
+                    (fsm.GetState("EB 3").Actions[8] as SendEventByName).delay = 0.6f;
+                    (fsm.GetState("EB 3").Actions[9] as SendEventByName).delay = 0.85f;
+                    (fsm.GetState("EB 3").Actions[10] as Wait).time.Value = 0.95f;
+                }
+            });
             (fsm.GetState("EB 1").Actions[8] as SendEventByName).delay = 0.3f;
             (fsm.GetState("EB 1").Actions[9] as SendEventByName).delay = 0.55f;
             (fsm.GetState("EB 1").Actions[10] as Wait).time.Value = 0.6f;
@@ -178,7 +194,7 @@ public partial class AttackCommands : Module
                     (fsm.GetState("Orb Summon").Actions[2] as Wait).time.Value = 1.5f;
                 }
             });
-            (fsm.GetState("Orb Summon").Actions[2] as Wait).time.Value = 0.375f;
+            (fsm.GetState("Orb Summon").Actions[2] as Wait).time.Value = 0.5f;
         }
     }
 }

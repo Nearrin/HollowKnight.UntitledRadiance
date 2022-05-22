@@ -8,6 +8,7 @@ public class UntitledRadiance : Mod, IGlobalSettings<Settings>, IMenuMod
 {
     public static UntitledRadiance untitledRadiance;
     private Control control;
+    public GameObject absoluteRadiance;
     private Teleport teleport;
     private AttackChoices attackChoices;
     private AttackCommands attackCommands;

@@ -39,7 +39,24 @@ public partial class AttackChoices : Module
             fsm.InsertCustomAction("A1 Choice", () =>
             {
                 var phase = fsm.gameObject.LocateMyFSM("Phase Control").AccessStringVariable("phase").Value;
-                if (phase == "1.4")
+                if (phase == "1.3")
+                {
+                    (fsm.GetState("Nail L Sweep").Actions[0] as SendEventByName).delay.Value = 1;
+                    (fsm.GetState("Nail L Sweep").Actions[1] as SendEventByName).delay.Value = 3.4f;
+                    (fsm.GetState("Nail L Sweep").Actions[2] as SendEventByName).delay.Value = 3.4f;
+                    (fsm.GetState("Nail L Sweep").Actions[3] as SendEventByName).delay.Value = 5.8f;
+                    (fsm.GetState("Nail L Sweep").Actions[4] as SendEventByName).delay.Value = 5.8f;
+                    (fsm.GetState("Nail L Sweep").Actions[5] as SendEventByName).delay.Value = 8.2f;
+                    (fsm.GetState("Nail L Sweep").Actions[6] as Wait).time.Value = 11.2f;
+                    (fsm.GetState("Nail R Sweep").Actions[0] as SendEventByName).delay.Value = 1;
+                    (fsm.GetState("Nail R Sweep").Actions[1] as SendEventByName).delay.Value = 3.4f;
+                    (fsm.GetState("Nail R Sweep").Actions[2] as SendEventByName).delay.Value = 3.4f;
+                    (fsm.GetState("Nail R Sweep").Actions[3] as SendEventByName).delay.Value = 5.8f;
+                    (fsm.GetState("Nail R Sweep").Actions[4] as SendEventByName).delay.Value = 5.8f;
+                    (fsm.GetState("Nail R Sweep").Actions[5] as SendEventByName).delay.Value = 8.2f;
+                    (fsm.GetState("Nail R Sweep").Actions[6] as Wait).time.Value = 11.2f;
+                }
+                else if (phase == "1.4")
                 {
                     fsm.SendEvent("EYE BEAMS");
                 }

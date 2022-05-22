@@ -48,7 +48,16 @@ public partial class BeamSweeper : Module
                 }
                 fsm.AddState("Beam Sweep " + direction + " Delay");
                 fsm.ChangeTransition("Idle", "BEAM SWEEP " + direction, "Beam Sweep " + direction + " Delay");
-                fsm.AddAction("Beam Sweep " + direction + " Delay", fsm.CreateWait(1.5f, fsm.GetFSMEvent("FINISHED")));
+                fsm.AddAction("Beam Sweep " + direction + " Delay", fsm.CreateWait(2f, fsm.GetFSMEvent("FINISHED")));
+                fsm.AddCustomAction("Beam Sweep " + direction + " Delay", () =>
+                {
+                    var absoluteRadiance = untitledRadiance_.absoluteRadiance;
+                    var phase = absoluteRadiance.LocateMyFSM("Phase Control").AccessStringVariable("phase").Value;
+                    if (phase == "1.3")
+                    {
+                        fsm.SetState("Idle");
+                    }
+                });
                 fsm.AddTransition("Beam Sweep " + direction + " Delay", "FINISHED", "Beam Sweep " + antiName);
                 if (direction == "L")
                 {

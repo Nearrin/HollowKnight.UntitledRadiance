@@ -20,6 +20,7 @@ public partial class Control : Module
     {
         if (IsAbsoluteRadiance(fsm.gameObject) && fsm.FsmName == "Control")
         {
+            untitledRadiance_.absoluteRadiance = fsm.gameObject;
             fsm.InsertCustomAction("Tele First?", () =>
             {
                 var phase = fsm.gameObject.LocateMyFSM("Phase Control").AccessStringVariable("phase").Value;
