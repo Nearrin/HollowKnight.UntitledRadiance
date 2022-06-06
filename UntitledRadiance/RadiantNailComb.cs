@@ -55,9 +55,13 @@ public partial class RadiantNailComb : Module
             {
                 var absoluteRadiance = untitledRadiance_.absoluteRadiance;
                 var phase = absoluteRadiance.LocateMyFSM("Phase Control").AccessStringVariable("phase").Value;
-                if (phase == "1.3" || phase == "2.1")
+                if (phase == "1.3")
                 {
                     fsm.AccessFloatVariable("Nail Speed").Value = 13f;
+                }
+                if (phase == "2.1")
+                {
+                    fsm.AccessFloatVariable("Nail Speed").Value = 6.5f;
                 }
             }, 0);
         }
