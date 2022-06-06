@@ -73,17 +73,17 @@ public partial class PhaseControl : Module
                             phase = fsm.AccessStringVariable("phase").Value;
                             Log("Switching phase to: " + phase.ToString());
                             fsm.gameObject.LocateMyFSM("Attack Commands").SendEvent("CW");
+                            foreach (var myFSM in untitledRadiance_.attackCommands.myRotatingBurst.GetComponentsInChildren<PlayMakerFSM>())
+                            {
+                                myFSM.SendEvent("END");
+                            }
+                            fsm.SetState("Stun 1");
                             Log("Switched phase to: " + phase.ToString());
                         }
                     }
                 }
                 else if (phase == "2.1")
                 {
-                    fsm.SetState("Stun 1");
-                    foreach(var myFSM in untitledRadiance_.attackCommands.myRotatingBurst.GetComponentsInChildren<PlayMakerFSM>())
-                    {
-                        myFSM.SendEvent("END");
-                    }
                 }
                 else
                 {

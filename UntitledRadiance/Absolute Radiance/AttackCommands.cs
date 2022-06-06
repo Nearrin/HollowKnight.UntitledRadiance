@@ -123,7 +123,7 @@ public partial class AttackCommands : Module
             {
                 target = FsmEventTarget.EventTarget.GameObject,
                 gameObject = fsmOwnerDefault,
-                sendToChildren= true,
+                sendToChildren = true,
             };
             fsm.AddAction("Rotating Beam", fsm.CreateSendEventByName(fSMEventTarget, "ANTIC", 0));
             fsm.AddAction("Rotating Beam", fsm.CreateSendEventByName(fSMEventTarget, "FIRE", 0.2f));
@@ -197,6 +197,10 @@ public partial class AttackCommands : Module
                 }
             });
             (fsm.GetState("Orb Summon").Actions[2] as Wait).time.Value = 0.5f;
+
+            fsm.InsertAction("Aim", fsm.GetState("Comb Top").Actions[2], 0);
+            fsm.InsertAction("Aim", fsm.GetState("Comb Top").Actions[1], 0);
+            fsm.InsertAction("Aim", fsm.GetState("Comb Top").Actions[0], 0);
         }
     }
 }

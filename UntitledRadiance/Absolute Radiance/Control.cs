@@ -37,6 +37,7 @@ public partial class Control : Module
                     teleport.SetState("Antic");
                 }
             }, 1);
+            fsm.RemoveAction("Plat Setup", 2);
         }
     }
 }

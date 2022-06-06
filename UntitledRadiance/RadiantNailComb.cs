@@ -25,28 +25,36 @@ public partial class RadiantNailComb : Module
             (fsm.GetAction("Top", 0) as RandomFloat).max = 62.7f;
             fsm.InsertCustomAction("Spawn R", () =>
             {
-                if (fsm.AccessIntVariable("Type").Value == 3)
+                var absoluteRadiance = untitledRadiance_.absoluteRadiance;
+                var phase = absoluteRadiance.LocateMyFSM("Phase Control").AccessStringVariable("phase").Value;
+                if (fsm.AccessIntVariable("Type").Value == 3 && phase!="2.1")
                 {
                     fsm.SetState("RG3");
                 }
             }, 1);
             fsm.InsertCustomAction("RG3", () =>
             {
-                if (fsm.AccessIntVariable("Type").Value == 3)
+                var absoluteRadiance = untitledRadiance_.absoluteRadiance;
+                var phase = absoluteRadiance.LocateMyFSM("Phase Control").AccessStringVariable("phase").Value;
+                if (fsm.AccessIntVariable("Type").Value == 3 && phase != "2.1")
                 {
                     fsm.SetState("Spawn R");
                 }
             }, 7);
             fsm.InsertCustomAction("Spawn L", () =>
             {
-                if (fsm.AccessIntVariable("Type").Value == 3)
+                var absoluteRadiance = untitledRadiance_.absoluteRadiance;
+                var phase = absoluteRadiance.LocateMyFSM("Phase Control").AccessStringVariable("phase").Value;
+                if (fsm.AccessIntVariable("Type").Value == 3 && phase != "2.1")
                 {
                     fsm.SetState("LG3");
                 }
             }, 1);
             fsm.InsertCustomAction("LG3", () =>
             {
-                if (fsm.AccessIntVariable("Type").Value == 3)
+                var absoluteRadiance = untitledRadiance_.absoluteRadiance;
+                var phase = absoluteRadiance.LocateMyFSM("Phase Control").AccessStringVariable("phase").Value;
+                if (fsm.AccessIntVariable("Type").Value == 3 && phase != "2.1")
                 {
                     fsm.SetState("Spawn L");
                 }
