@@ -61,7 +61,7 @@ public partial class RadiantNailComb : Module
                 }
                 if (phase == "2.1")
                 {
-                    fsm.AccessFloatVariable("Nail Speed").Value = 6.5f;
+                    fsm.AccessFloatVariable("Nail Speed").Value = 13f;
                 }
             }, 0);
         }
