@@ -11,7 +11,7 @@ public class UntitledRadiance : Mod, IGlobalSettings<Settings>, IMenuMod
     public GameObject absoluteRadiance;
     private Teleport teleport;
     private AttackChoices attackChoices;
-    private AttackCommands attackCommands;
+    public AttackCommands attackCommands;
     private PhaseControl phaseControl;
     private SpikeControl spkieControl;
     private RadiantSpike radiantSpike;

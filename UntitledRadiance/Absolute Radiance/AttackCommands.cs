@@ -1,6 +1,7 @@
 ﻿namespace UntitledRadiance;
 public partial class AttackCommands : Module
 {
+    public GameObject myRotatingBurst = null;
     public AttackCommands(UntitledRadiance untitledRadiance) : base(untitledRadiance)
     {
     }
@@ -107,6 +108,7 @@ public partial class AttackCommands : Module
             var rotatingEyeBeamGlow = UnityEngine.Object.Instantiate((prefabs["trackingEyeBeamGlow"] as GameObject), fsm.gameObject.transform);
             rotatingEyeBeamGlow.SetActive(true);
             var rotatingBurst = rotatingEyeBeamGlow.transform.Find("Burst 1").gameObject;
+            myRotatingBurst = rotatingBurst;
             UnityEngine.Object.Destroy(rotatingEyeBeamGlow.transform.Find("Burst 2").gameObject);
             UnityEngine.Object.Destroy(rotatingEyeBeamGlow.transform.Find("Burst 3").gameObject);
             UnityEngine.Object.Destroy(rotatingEyeBeamGlow.transform.Find("Ascend Beam").gameObject);

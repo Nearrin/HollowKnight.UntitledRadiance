@@ -22,7 +22,7 @@ public partial class PhaseControl : Module
         {
             fsm.AddCustomAction("Init", () =>
             {
-                fsm.gameObject.GetComponent<HealthManager>().hp = 5000;
+                fsm.gameObject.GetComponent<HealthManager>().hp = 1600;
                 fsm.gameObject.RefreshHPBar();
                 fsm.AccessStringVariable("phase").Value = "1.1";
             });
@@ -33,7 +33,7 @@ public partial class PhaseControl : Module
                 var spikeControl = fsm.gameObject.transform.parent.Find("Spike Control").gameObject;
                 if (phase == "1.1")
                 {
-                    if (hp <= 5000 - 1000)
+                    if (hp <= 1500)
                     {
                         fsm.AccessStringVariable("phase").Value = "1.2";
                         phase = fsm.AccessStringVariable("phase").Value;
@@ -44,7 +44,7 @@ public partial class PhaseControl : Module
                 }
                 else if (phase == "1.2")
                 {
-                    if (hp <= 5000 - 1000 * 2)
+                    if (hp <= 1400)
                     {
                         fsm.AccessStringVariable("phase").Value = "1.3";
                         phase = fsm.AccessStringVariable("phase").Value;
@@ -55,7 +55,7 @@ public partial class PhaseControl : Module
                 }
                 else if (phase == "1.3")
                 {
-                    if (hp <= 5000 - 1000 * 3)
+                    if (hp <= 1300)
                     {
                         fsm.AccessStringVariable("phase").Value = "1.4";
                         phase = fsm.AccessStringVariable("phase").Value;
@@ -65,7 +65,7 @@ public partial class PhaseControl : Module
                 }
                 else if (phase == "1.4")
                 {
-                    if (hp <= 5000 - 1000 * 4 && false)
+                    if (hp <= 1200)
                     {
                         if(fsm.gameObject.LocateMyFSM("Attack Commands").ActiveStateName== "Rotating Beam")
                         {
@@ -79,6 +79,11 @@ public partial class PhaseControl : Module
                 }
                 else if (phase == "2.1")
                 {
+                    fsm.SetState("Stun 1");
+                    foreach(var myFSM in untitledRadiance_.attackCommands.myRotatingBurst.GetComponentsInChildren<PlayMakerFSM>())
+                    {
+                        myFSM.SendEvent("END");
+                    }
                 }
                 else
                 {
