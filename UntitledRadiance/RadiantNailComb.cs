@@ -25,36 +25,28 @@ public partial class RadiantNailComb : Module
             (fsm.GetAction("Top", 0) as RandomFloat).max = 62.7f;
             fsm.InsertCustomAction("Spawn R", () =>
             {
-                var absoluteRadiance = untitledRadiance_.absoluteRadiance;
-                var phase = absoluteRadiance.LocateMyFSM("Phase Control").AccessStringVariable("phase").Value;
-                if (fsm.AccessIntVariable("Type").Value == 3 && phase!="2.1")
+                if (fsm.AccessIntVariable("Type").Value == 3)
                 {
                     fsm.SetState("RG3");
                 }
             }, 1);
             fsm.InsertCustomAction("RG3", () =>
             {
-                var absoluteRadiance = untitledRadiance_.absoluteRadiance;
-                var phase = absoluteRadiance.LocateMyFSM("Phase Control").AccessStringVariable("phase").Value;
-                if (fsm.AccessIntVariable("Type").Value == 3 && phase != "2.1")
+                if (fsm.AccessIntVariable("Type").Value == 3)
                 {
                     fsm.SetState("Spawn R");
                 }
             }, 7);
             fsm.InsertCustomAction("Spawn L", () =>
             {
-                var absoluteRadiance = untitledRadiance_.absoluteRadiance;
-                var phase = absoluteRadiance.LocateMyFSM("Phase Control").AccessStringVariable("phase").Value;
-                if (fsm.AccessIntVariable("Type").Value == 3 && phase != "2.1")
+                if (fsm.AccessIntVariable("Type").Value == 3)
                 {
                     fsm.SetState("LG3");
                 }
             }, 1);
             fsm.InsertCustomAction("LG3", () =>
             {
-                var absoluteRadiance = untitledRadiance_.absoluteRadiance;
-                var phase = absoluteRadiance.LocateMyFSM("Phase Control").AccessStringVariable("phase").Value;
-                if (fsm.AccessIntVariable("Type").Value == 3 && phase != "2.1")
+                if (fsm.AccessIntVariable("Type").Value == 3)
                 {
                     fsm.SetState("Spawn L");
                 }
@@ -63,7 +55,7 @@ public partial class RadiantNailComb : Module
             {
                 var absoluteRadiance = untitledRadiance_.absoluteRadiance;
                 var phase = absoluteRadiance.LocateMyFSM("Phase Control").AccessStringVariable("phase").Value;
-                if (phase == "1.3")
+                if (phase == "1.3" || phase == "2.1")
                 {
                     fsm.AccessFloatVariable("Nail Speed").Value = 13f;
                 }

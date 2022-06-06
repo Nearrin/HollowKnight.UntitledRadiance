@@ -29,7 +29,7 @@ public partial class RadiantNail : Module
                 var phase = absoluteRadiance.LocateMyFSM("Phase Control").AccessStringVariable("phase").Value;
                 if (phase == "2.1")
                 {
-                    var y = HeroController.instance.transform.position.y + 32;
+                    var y = HeroController.instance.transform.position.y + random.Next(16, 32);
                     var position = fsm.gameObject.transform.position;
                     position.y = y;
                     fsm.gameObject.transform.position = position;
