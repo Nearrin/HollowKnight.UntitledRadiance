@@ -75,6 +75,7 @@ public partial class PhaseControl : Module
                             fsm.gameObject.LocateMyFSM("Attack Commands").SendEvent("CW");
                             foreach (var myFSM in untitledRadiance_.attackCommands.myRotatingBurst.GetComponentsInChildren<PlayMakerFSM>())
                             {
+                                myFSM.SendEvent("FIRE");
                                 myFSM.SendEvent("END");
                             }
                             fsm.SetState("Stun 1");
